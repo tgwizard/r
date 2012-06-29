@@ -1,9 +1,21 @@
 jQuery ->
+  class Item extends Backbone.Model
+    defaults:
+      first: 'Hello'
+      second: 'Backbone'
+
+  class List extends Backbone.Collection
+    model: Item
+
   class ListView extends Backbone.View
     el: $ 'body'
 
     initialize: ->
       _.bindAll @
+
+      @collection = new List
+      @collection.bind 'add', @appendItem
+
       @counter = 0
       @render()
 
@@ -13,7 +25,12 @@ jQuery ->
 
     addItem: ->
       @counter++
-      $('ul').append "<li>Itemo: #{@counter}</li>"
+      item = new Item
+      item.set second: "#{item.get 'second'} #{@counter}"
+      @collection.add item
+
+    appendItem: (item) ->
+      $('ul').append "<li>Item: #{item.get 'first'} #{item.get 'second'}</li>"
 
     events: 'click button': 'addItem'
 

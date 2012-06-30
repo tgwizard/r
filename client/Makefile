@@ -3,31 +3,46 @@
 #
 BUILDDIR = build
 APPDIR = app/app
+CSSDIR = app/css
+
 
 SRC_ = app.js
 SRC = ${addprefix ${APPDIR}/, ${SRC_}}
+
+LESS_SRC_ = style.css
+LESS_SRC = ${addprefix ${CSSDIR}/, ${LESS_SRC_}}
 
 DATE=$(shell date +%I:%M%p)
 CHECK=\033[32m✔\033[39m
 HR=\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#
 
 
-all: app/bootstrap app
+all: preparation app/bootstrap coffee less
+
+preparation:
+	@mkdir -p $(APPDIR)
+	@mkdir -p $(CSSDIR)
 
 app/app/%.js: src/%.coffee
 	coffee -o ${APPDIR} -c $<
 
+app/css/%.css: src/less/%.less
+	recess --compile $< > $@
+
 app/bootstrap:
 	@make -C lib/bootstrap --no-print-directory
 
-app: $(SRC)
+coffee: $(SRC)
+
+less: $(LESS_SRC)
 
 clean:
 	@echo "Cleaning app..."
 	rm -rf app/app
+	rm -rf app/css
 	@echo "Clean complete"
 
-clean_all: clean
+clean-all: clean
 	@make clean -s -C lib/bootstrap
 
 #
@@ -49,4 +64,4 @@ watch:
 	watchr -e "watch('less/.*\.less') { system 'make' }"
 
 
-.PHONY: docs watch gh-pages
+.PHONY: docs watch gh-pages app

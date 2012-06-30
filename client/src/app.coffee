@@ -8,7 +8,7 @@ jQuery ->
     model: Item
 
   class ListView extends Backbone.View
-    el: $ 'body'
+    el: $ '#main-container'
 
     initialize: ->
       _.bindAll @
@@ -30,7 +30,7 @@ jQuery ->
       @collection.add item
 
     appendItem: (item) ->
-      $('ul').append "<li>Item: #{item.get 'first'} #{item.get 'second'}</li>"
+      $(@el).find('ul').append "<li>Item: #{item.get 'first'} #{item.get 'second'}</li>"
 
     events: 'click button': 'addItem'
 

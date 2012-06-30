@@ -63,8 +63,8 @@ watch:
 	bash -c 'while [ 0 ]; do make --no-print-directory; sleep ${WATCHINTERVAL}; done'
 	#watch make --no-print-directory
 
-install_dep_globally:
-	sudo npm install -g -d
+install_deps:
+	npm install
 #
 # RUN JSHINT & QUNIT TESTS IN PHANTOMJS
 #

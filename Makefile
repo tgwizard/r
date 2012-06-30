@@ -4,7 +4,7 @@
 BUILDDIR = build
 APPDIR = app/app
 CSSDIR = app/css
-SERVERDIR = server
+SERVERDIR = server/server
 
 APPSRC_ = app.js
 APPSRC = ${addprefix ${APPDIR}/, ${APPSRC_}}
@@ -13,7 +13,7 @@ LESSSRC_ = style.css
 LESSSRC = ${addprefix ${CSSDIR}/, ${LESSSRC_}}
 
 SERVERSRC_ = server.js
-SERVERSRC_ = ${addprefix ${SERVERDIR}/, ${SERVERSRC_}}
+SERVERSRC = ${addprefix ${SERVERDIR}/, ${SERVERSRC_}}
 
 DATE=$(shell date +%I:%M%p)
 CHECK=\033[32m✔\033[39m
@@ -31,8 +31,8 @@ preparation:
 app/app/%.js: src/app/%.coffee
 	coffee -o ${APPDIR} -c $<
 
-server/%.js: src/server/%.coffee
-	coffee -o ${APPDIR} -c $<
+server/server/%.js: src/server/%.coffee
+	coffee -o ${SERVERDIR} -c $<
 
 app/css/%.css: src/less/%.less
 	recess --compile $< > $@
@@ -48,9 +48,11 @@ less: $(LESSSRC)
 
 clean:
 	@echo "Cleaning app..."
-	rm -rf app/app
-	rm -rf app/css
-	@echo "Clean complete"
+	rm -rf $(APPDIR)
+	rm -rf $(CSSDIR)
+	@echo "Cleaning server..."
+	rm -rf $(SERVERDIR)
+
 
 clean-all: clean
 	@make clean -s -C lib/bootstrap

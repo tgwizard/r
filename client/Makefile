@@ -5,7 +5,6 @@ BUILDDIR = build
 APPDIR = app/app
 CSSDIR = app/css
 
-
 SRC_ = app.js
 SRC = ${addprefix ${APPDIR}/, ${SRC_}}
 
@@ -16,6 +15,7 @@ DATE=$(shell date +%I:%M%p)
 CHECK=\033[32m✔\033[39m
 HR=\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#
 
+WATCHINTERVAL = 2
 
 all: preparation app/bootstrap coffee less
 
@@ -45,6 +45,14 @@ clean:
 clean-all: clean
 	@make clean -s -C lib/bootstrap
 
+#watch:
+#	nodejs watchmake.js src/ src/less/
+
+watch:
+	@echo "Performing make every ${WATCHINTERVAL}s"
+	bash -c 'while [ 0 ]; do make --no-print-directory; sleep ${WATCHINTERVAL}; done'
+	#watch make --no-print-directory
+
 #
 # RUN JSHINT & QUNIT TESTS IN PHANTOMJS
 #
@@ -55,13 +63,5 @@ test:
 	phantomjs js/tests/phantom.js "http://localhost:3000/js/tests"
 	kill -9 `cat js/tests/pid.txt`
 	rm js/tests/pid.txt
-
-#
-# WATCH LESS FILES
-#
-watch:
-	echo "Watching less files..."; \
-	watchr -e "watch('less/.*\.less') { system 'make' }"
-
 
 .PHONY: docs watch gh-pages app

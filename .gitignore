@@ -1,2 +1,5 @@
+app/app/
+app/css/
+app/bootstrap/
 build/
-node_modules
+node_modules/

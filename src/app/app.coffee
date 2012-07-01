@@ -8,7 +8,7 @@ jQuery ->
     model: Item
 
   class ListView extends Backbone.View
-    el: $ '#main-container'
+    el: $ '#testing-ground'
 
     initialize: ->
       _.bindAll @

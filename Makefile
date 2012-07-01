@@ -12,7 +12,7 @@ APPSRC = ${addprefix ${APPDIR}/, ${APPSRC_}}
 LESSSRC_ = style.css
 LESSSRC = ${addprefix ${CSSDIR}/, ${LESSSRC_}}
 
-SERVERSRC_ = server.js
+SERVERSRC_ = server.js riddles.js errors.js
 SERVERSRC = ${addprefix ${SERVERDIR}/, ${SERVERSRC_}}
 
 DATE=$(shell date +%I:%M%p)
@@ -64,6 +64,9 @@ watch:
 	@echo "Performing make every ${WATCHINTERVAL}s"
 	bash -c 'while [ 0 ]; do make --no-print-directory; sleep ${WATCHINTERVAL}; done'
 	#watch make --no-print-directory
+
+start_server: all
+	node server/server/server.js
 
 install_deps:
 	npm install

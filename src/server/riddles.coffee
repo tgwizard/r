@@ -1,4 +1,4 @@
-exports.riddles =
+exports.riddles = riddles =
 	'three-switches':
 		title: "Three switches"
 		content:
@@ -23,4 +23,28 @@ exports.riddles =
 			"""
 			Bah!
 			"""
+	'blue-eyes':
+		title: "Blue eyes"
+		content:
+			"""
+			Blue eyes on a far-away island...
+			"""
+		answer:
+			"""
+			Beh!
+			"""
+	'devils-gate':
+		title: "The devil's gate"
+		content:
+			"""
+			In line at the devil's gate, black and white hats...
+			"""
+		answer:
+			"""
+			Buh!
+			"""
 
+for slug, riddle of riddles
+	riddle.slug = slug
+	riddle.url = "/riddle/#{slug}"
+	riddle.url_answer = "#{riddle.url}/answer"

@@ -2,7 +2,10 @@ doctype 5
 html ->
 	head ->
 		meta charset: 'utf-8'
-		title "#{@title or 'Untitled'} - Riddle me this"
+		if @title
+			title "#{@title} - Riddle me this"
+		else
+			title "Riddle me this"
 		link rel: 'stylesheet', href: '/static/bootstrap/css/bootstrap.css'
 		link rel: 'stylesheet', href: '/static/css/style.css'
 		link rel: 'stylesheet', href: '/static/bootstrap/css/bootstrap-responsive.css'
@@ -14,12 +17,13 @@ html ->
 						span class: 'icon-bar'
 						span class: 'icon-bar'
 						span class: 'icon-bar'
-					a class: 'brand', href: '#', -> 'Riddle me this'
+					a class: 'brand', href: '/', -> 'Riddle me this'
 					div class: 'nav-collapse', ->
 						ul class: 'nav', ->
-							li class: 'active', -> a href: '#', -> 'Home'
-							li -> a href: '#', -> 'About'
-							li -> a href: '#', -> 'Contact'
+							li class: 'active', -> a href: '/', -> 'All riddles'
+							li -> a href: '/about', -> 'About'
+						form class: 'navbar-search pull-left', action: '/search', ->
+							input class: 'search-query span2', type: 'text', placeholder: 'Search'
 		div class: 'container-fluid', ->
 			div  ->
 				@body

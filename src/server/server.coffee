@@ -32,13 +32,24 @@ riddles = require('./riddles')
 
 # routes
 server.get '/', (req, res) ->
-	res.render 'index', locals: {content: 'Testing sending some content...'}
+	rs = (riddles.riddles[key] for key of riddles.riddles)
+	res.render 'index', riddles: rs
 
-server.get '/riddle/:slug', (req, res) ->
+loadRiddle = (req, res, next) ->
 	r = riddles.riddles[req.params.slug]
 	if not r
 		errors.throw404 req, res
-	res.render 'show', riddle: r
+	req.riddle = r
+	next()
+
+server.get '/riddle/:slug', loadRiddle, (req, res) ->
+	res.render 'show', riddle: req.riddle, show_answer: false
+
+server.get '/riddle/:slug/answer', loadRiddle, (req, res) ->
+	res.render 'show', riddle: req.riddle, show_answer: true
+
+server.get '/about', (req, res) ->
+	res.render 'about'
 
 # 404 path, keep last
 server.get '/*', (req, res) ->

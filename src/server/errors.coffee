@@ -1,6 +1,6 @@
 class NotFound extends Error
 	constructor: (url) ->
-		@name = 'NotFound'
+		@name = "NotFound #{url}"
 		if url
 			Error.call @, "Cannot find #{url}"
 			@url = url

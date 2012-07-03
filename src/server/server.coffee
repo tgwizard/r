@@ -12,6 +12,7 @@ server.configure ->
 	server.use express.cookieParser()
 	# static files
 	server.use '/static', express.static('./app')
+	server.use connect.favicon './assets/favicon.ico'
 	server.use server.router
 
 server.configure 'development', ->

@@ -1,6 +1,3 @@
-PagedownConverter = require('pagedown/Markdown.Converter').Converter
-mdConv = new PagedownConverter
-
 riddles =
 	'three-switches':
 		title: "Three switches"
@@ -51,9 +48,6 @@ for slug, riddle of riddles
 	riddle.slug = slug
 	riddle.url = "/riddle/#{slug}"
 	riddle.url_answer = "#{riddle.url}/answer"
-
-	riddle.content_html = mdConv.makeHtml riddle.content
-	riddle.answer_html = mdConv.makeHtml riddle.answer
 
 riddles.list = (riddles[key] for key of riddles)
 

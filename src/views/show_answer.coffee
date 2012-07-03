@@ -3,5 +3,5 @@ div class: 'riddle row-fluid', ->
 		h2 -> @riddle.title
 		div class: 'answer', ->
 			h3 "Answer"
-			div -> @riddle.answer_html
+			div -> @riddle.html.answer
 			p -> a href: @riddle.url, -> "&laquo; Back to riddle"

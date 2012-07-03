@@ -1,6 +1,13 @@
-# setup express
+# third party libraries
 express = require 'express'
 connect = require 'connect'
+PagedownConverter = require('pagedown/Markdown.Converter').Converter
+
+# local modules
+errors = require './errors'
+riddles = require('./riddles')
+
+# setup express
 server = express.createServer()
 server.configure ->
 	# setup views
@@ -19,7 +26,6 @@ server.configure 'development', ->
 	server.use(express.errorHandler({ showStack: true, dumpExceptions: true }));
 
 # errors
-errors = require './errors'
 server.error (err, req, res, next) ->
 	status = 500
 	title = '500 Error - Internal Server Error'
@@ -28,8 +34,14 @@ server.error (err, req, res, next) ->
 		title = '404 Error - Page Not Found'
 	res.render status, status: status, title: title, layout: 'error-layout'
 
-riddles = require('./riddles')
 
+# markdown -> html conversion
+mdConv = new PagedownConverter
+
+convertMarkdown2Html = (obj, fields...) ->
+	obj.html = {}
+	for f in fields
+		obj.html[f] = mdConv.makeHtml obj[f]
 
 # routes
 server.get '/', (req, res) ->
@@ -39,6 +51,7 @@ loadRiddle = (req, res, next) ->
 	r = riddles[req.params.slug]
 	if not r
 		errors.throw404 req, res
+	convertMarkdown2Html r, 'content', 'answer'
 	req.riddle = r
 	res.local 'riddle', r
 	next()

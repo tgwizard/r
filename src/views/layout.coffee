@@ -22,8 +22,6 @@ html ->
 						ul class: 'nav', ->
 							cls = if @active_tab == 'index' then 'active' else ''
 							li class: cls, -> a href: '/', -> 'All riddles'
-							cls = if @active_tab == 'about' then 'active' else ''
-							li class: cls, -> a href: '/about', -> 'About'
 						form class: 'navbar-search pull-left', action: '/search/', method: 'get', ->
 							input class: 'search-query span2', type: 'text', placeholder: 'Search', id: 'q', name: 'q', value: @q
 		div class: 'container-fluid', ->
@@ -31,7 +29,9 @@ html ->
 				@body
 			hr ''
 			footer ->
-				p -> 'By Adam Renberg.'
+				p ->
+					text 'By Adam Renberg. '
+					a href: '/about', -> 'About Riddle me this'
 		script src: '/static/js/vendor/jquery-1.7.2.js'
 		script src: '/static/bootstrap/js/bootstrap.min.js'
 		script src: '/static/js/vendor/json2.js'

@@ -51,9 +51,7 @@ server.get '/riddle/:slug/answer', loadRiddle, (req, res) ->
 
 server.get '/search', (req, res) ->
 	q = req.query.q or ""
-	console.log "search, q: #{q}"
 	result = riddles.search q
-	console.log "result: #{result}"
 	res.render 'search', q: q, riddles: result
 
 server.get '/about', (req, res) ->

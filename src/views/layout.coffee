@@ -20,8 +20,10 @@ html ->
 					a class: 'brand', href: '/', -> 'Riddle me this'
 					div class: 'nav-collapse', ->
 						ul class: 'nav', ->
-							li class: 'active', -> a href: '/', -> 'All riddles'
-							li -> a href: '/about', -> 'About'
+							cls = if @active_tab == 'index' then 'active' else ''
+							li class: cls, -> a href: '/', -> 'All riddles'
+							cls = if @active_tab == 'about' then 'active' else ''
+							li class: cls, -> a href: '/about', -> 'About'
 						form class: 'navbar-search pull-left', action: '/search/', method: 'get', ->
 							input class: 'search-query span2', type: 'text', placeholder: 'Search', id: 'q', name: 'q', value: @q
 		div class: 'container-fluid', ->

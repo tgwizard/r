@@ -69,7 +69,11 @@ start_server: all
 	node server/server/server.js
 
 install_deps:
+	mkdir -p node_modules
 	npm install
+	@# ugh...
+	cp -R lib/pagedown node_modules/
+
 #
 # RUN JSHINT & QUNIT TESTS IN PHANTOMJS
 #

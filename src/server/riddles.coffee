@@ -1,4 +1,4 @@
-exports.riddles = riddles =
+riddles =
 	'three-switches':
 		title: "Three switches"
 		content:
@@ -48,3 +48,38 @@ for slug, riddle of riddles
 	riddle.slug = slug
 	riddle.url = "/riddle/#{slug}"
 	riddle.url_answer = "#{riddle.url}/answer"
+
+riddles.list = (riddles[key] for key of riddles)
+
+riddles.search = (q) ->
+	result = []
+	words = q.split()
+	words = (w.toLowerCase() for w in words)
+	used = (false for riddle in riddles)
+
+	# word in title first
+	merge_results result, words, used, (riddle, word) ->
+		riddle.title.toLowerCase().indexOf(word) != -1
+
+	# then word in content
+	merge_results result, words, used, (riddle, word) ->
+		riddle.content.toLowerCase().indexOf(word) != -1
+
+	result
+
+merge_results = (result, words, used, generator) ->
+	temp = search_accept words, used, generator
+	Array::push.apply result, temp
+
+search_accept = (words, used, crit) ->
+	result = []
+	for riddle, i in riddles.list
+		if used[i]
+			continue
+		for word in words
+			if crit riddle, word
+				used[i] = true
+				result.push riddle
+	result
+
+module.exports = riddles

@@ -18,8 +18,8 @@ server.configure ->
 server.configure 'development', ->
 	server.use(express.errorHandler({ showStack: true, dumpExceptions: true }));
 
+# errors
 errors = require './errors'
-
 server.error (err, req, res, next) ->
 	status = 500
 	title = '500 Error - Internal Server Error'
@@ -33,24 +33,31 @@ riddles = require('./riddles')
 
 # routes
 server.get '/', (req, res) ->
-	rs = (riddles.riddles[key] for key of riddles.riddles)
-	res.render 'index', riddles: rs
+	res.render 'index', active_tab: 'index', riddles: riddles.list
 
 loadRiddle = (req, res, next) ->
-	r = riddles.riddles[req.params.slug]
+	r = riddles[req.params.slug]
 	if not r
 		errors.throw404 req, res
 	req.riddle = r
+	res.local 'riddle', r
 	next()
 
 server.get '/riddle/:slug', loadRiddle, (req, res) ->
-	res.render 'show', riddle: req.riddle, show_answer: false
+	res.render 'show'
 
 server.get '/riddle/:slug/answer', loadRiddle, (req, res) ->
-	res.render 'show', riddle: req.riddle, show_answer: true
+	res.render 'show_answer'
+
+server.get '/search', (req, res) ->
+	q = req.query.q or ""
+	console.log "search, q: #{q}"
+	result = riddles.search q
+	console.log "result: #{result}"
+	res.render 'search', q: q, riddles: result
 
 server.get '/about', (req, res) ->
-	res.render 'about'
+	res.render 'about', active_tab: 'about'
 
 # 404 path, keep last
 server.get '/*', (req, res) ->

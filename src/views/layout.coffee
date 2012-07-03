@@ -22,8 +22,8 @@ html ->
 						ul class: 'nav', ->
 							li class: 'active', -> a href: '/', -> 'All riddles'
 							li -> a href: '/about', -> 'About'
-						form class: 'navbar-search pull-left', action: '/search', ->
-							input class: 'search-query span2', type: 'text', placeholder: 'Search'
+						form class: 'navbar-search pull-left', action: '/search/', method: 'get', ->
+							input class: 'search-query span2', type: 'text', placeholder: 'Search', id: 'q', name: 'q', value: @q
 		div class: 'container-fluid', ->
 			div  ->
 				@body

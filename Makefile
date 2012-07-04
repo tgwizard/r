@@ -43,6 +43,7 @@ app/bootstrap:
 app: $(APPSRC)
 
 server: $(SERVERSRC)
+	cd lib/coffeekup && cake build
 
 less: $(LESSSRC)
 
@@ -74,6 +75,7 @@ install_deps:
 	@echo
 	@echo "Installing local libraries..."
 	npm install lib/pagedown
+	ln -sf ../lib/coffeekup node_modules/coffeekup
 
 #
 # RUN JSHINT & QUNIT TESTS IN PHANTOMJS

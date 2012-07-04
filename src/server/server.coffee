@@ -1,18 +1,19 @@
 # third party libraries
 express = require 'express'
 connect = require 'connect'
+coffeekup = require 'coffeekup'
 PagedownConverter = require('pagedown/Markdown.Converter').Converter
 
 # local modules
 errors = require './errors'
-riddles = require('./riddles')
+riddles = require './riddles'
 
 # setup express
 server = express.createServer()
 server.configure ->
 	# setup views
 	server.set 'view engine', 'coffee'
-	server.register '.coffee', require('coffeekup').adapters.express
+	server.engine '.coffee', coffeekup.adapters.express.express3
 	server.set 'views', './src/views'
 	server.use express.methodOverride()
 	server.use connect.bodyParser()
@@ -26,7 +27,7 @@ server.configure 'development', ->
 	server.use(express.errorHandler({ showStack: true, dumpExceptions: true }));
 
 # errors
-server.error (err, req, res, next) ->
+server.use (err, req, res, next) ->
 	status = 500
 	title = '500 Error - Internal Server Error'
 	if err instanceof errors.NotFound

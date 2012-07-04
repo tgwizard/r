@@ -25,8 +25,8 @@ html ->
 						form class: 'navbar-search pull-left', action: '/search/', method: 'get', ->
 							input class: 'search-query span2', type: 'text', placeholder: 'Search', id: 'q', name: 'q', value: @q
 		div class: 'container-fluid', ->
-			div  ->
-				@body
+			block 'content', ->
+				"Empty body"
 			hr ''
 			footer ->
 				p ->

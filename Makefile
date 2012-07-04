@@ -71,8 +71,9 @@ start_server: all
 install_deps:
 	mkdir -p node_modules
 	npm install
-	@# ugh...
-	cp -R lib/pagedown node_modules/
+	@echo
+	@echo "Installing local libraries..."
+	npm install lib/pagedown
 
 #
 # RUN JSHINT & QUNIT TESTS IN PHANTOMJS

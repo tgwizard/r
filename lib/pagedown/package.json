@@ -1,0 +1,21 @@
+{
+  "name": "pagedown",
+  "description": "A JavaScript MarkDown converter and editor.",
+  "version": "0.1.0",
+  "author": {
+    "name": "B...@stackoverflow.com",
+    "email": ""
+  },
+  "homepage": "http://code.google.com/p/pagedown/",
+  "repository": {
+    "type": "hg",
+		"url": "https://code.google.com/p/pagedown/"
+  },
+  "dependencies": {
+  },
+  "devDependencies": {
+  },
+  "keywords": [
+    "markdown"
+  ]
+}

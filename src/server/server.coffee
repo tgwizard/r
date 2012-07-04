@@ -13,7 +13,7 @@ server = express.createServer()
 server.configure ->
 	# setup views
 	server.set 'view engine', 'coffee'
-	server.engine '.coffee', coffeekup.adapters.express.express3
+	server.engine '.coffee', coffeekup.adapters.express
 	server.set 'views', './src/views'
 	server.use express.methodOverride()
 	server.use connect.bodyParser()
@@ -46,15 +46,16 @@ convertMarkdown2Html = (obj, fields...) ->
 
 # routes
 server.get '/', (req, res) ->
-	res.render 'index', active_tab: 'index', riddles: riddles.list
+	res.locals.active_tab = 'index'
+	res.locals.riddles = riddles.list
+	res.render 'index'
 
 loadRiddle = (req, res, next) ->
 	r = riddles[req.params.slug]
 	if not r
 		errors.throw404 req, res
 	convertMarkdown2Html r, 'content', 'answer'
-	req.riddle = r
-	res.local 'riddle', r
+	res.locals.riddle = r
 	next()
 
 server.get '/riddle/:slug', loadRiddle, (req, res) ->
@@ -66,10 +67,12 @@ server.get '/riddle/:slug/answer', loadRiddle, (req, res) ->
 server.get '/search', (req, res) ->
 	q = req.query.q or ""
 	result = riddles.search q
-	res.render 'search', q: q, riddles: result
+	res.locals.q = q
+	res.locals.riddles = result
+	res.render 'search'
 
 server.get '/about', (req, res) ->
-	res.render 'about', active_tab: 'about'
+	res.render 'about',
 
 # 404 path, keep last
 server.get '/*', (req, res) ->

@@ -1,7 +1,7 @@
 # third party libraries
 express = require 'express'
 connect = require 'connect'
-coffeekup = require 'coffeekup'
+coffeefilter = require 'coffeefilter'
 PagedownConverter = require('pagedown/Markdown.Converter').Converter
 
 # local modules
@@ -13,7 +13,7 @@ server = express.createServer()
 server.configure ->
 	# setup views
 	server.set 'view engine', 'coffee'
-	server.engine '.coffee', coffeekup.adapters.express
+	server.engine '.coffee', coffeefilter.adapters.express
 	server.set 'views', './src/views'
 	server.use express.methodOverride()
 	server.use connect.bodyParser()

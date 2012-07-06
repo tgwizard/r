@@ -43,7 +43,7 @@ app/bootstrap:
 app: $(APPSRC)
 
 server: $(SERVERSRC)
-	cd lib/coffeekup && cake build
+	cd lib/coffeefilter && cake build
 
 less: $(LESSSRC)
 
@@ -75,7 +75,7 @@ install_deps:
 	@echo
 	@echo "Installing local libraries..."
 	npm install lib/pagedown
-	ln -sf ../lib/coffeekup node_modules/coffeekup
+	ln -sf ../lib/coffeefilter node_modules/coffeefilter
 
 #
 # RUN JSHINT & QUNIT TESTS IN PHANTOMJS

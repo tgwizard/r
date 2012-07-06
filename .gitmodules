@@ -1,0 +1,3 @@
+[submodule "lib/coffeefilter"]
+	path = lib/coffeefilter
+	url = git@github.com:tgwizard/coffeefilter.git

@@ -9,25 +9,26 @@ errors = require './errors'
 riddles = require './riddles'
 
 # setup express
-server = express.createServer()
-server.configure ->
+app = express()
+server = require('http').createServer app
+app.configure ->
 	# setup views
-	server.set 'view engine', 'coffee'
-	server.engine '.coffee', coffeefilter.adapters.express
-	server.set 'views', './src/views'
-	server.use express.methodOverride()
-	server.use connect.bodyParser()
-	server.use express.cookieParser()
+	app.set 'view engine', 'coffee'
+	app.engine '.coffee', coffeefilter.adapters.express
+	app.set 'views', './src/views'
+	app.use express.methodOverride()
+	app.use connect.bodyParser()
+	app.use express.cookieParser()
 	# static files
-	server.use '/static', express.static('./app')
-	server.use connect.favicon './assets/favicon.ico'
-	server.use server.router
+	app.use '/static', express.static('./app')
+	app.use connect.favicon './assets/favicon.ico'
+	app.use app.router
 
-server.configure 'development', ->
-	server.use(express.errorHandler({ showStack: true, dumpExceptions: true }));
+app.configure 'development', ->
+	app.use(express.errorHandler({ showStack: true, dumpExceptions: true }));
 
 # errors
-server.use (err, req, res, next) ->
+app.use (err, req, res, next) ->
 	status = 500
 	title = '500 Error - Internal Server Error'
 	if err instanceof errors.NotFound
@@ -45,7 +46,7 @@ convertMarkdown2Html = (obj, fields...) ->
 		obj.html[f] = mdConv.makeHtml obj[f]
 
 # routes
-server.get '/', (req, res) ->
+app.get '/', (req, res) ->
 	res.locals.active_tab = 'index'
 	res.locals.riddles = riddles.list
 	res.render 'index'
@@ -58,24 +59,24 @@ loadRiddle = (req, res, next) ->
 	res.locals.riddle = r
 	next()
 
-server.get '/riddle/:slug', loadRiddle, (req, res) ->
+app.get '/riddle/:slug', loadRiddle, (req, res) ->
 	res.render 'show'
 
-server.get '/riddle/:slug/answer', loadRiddle, (req, res) ->
+app.get '/riddle/:slug/answer', loadRiddle, (req, res) ->
 	res.render 'show_answer'
 
-server.get '/search', (req, res) ->
+app.get '/search', (req, res) ->
 	q = req.query.q or ""
 	result = riddles.search q
 	res.locals.q = q
 	res.locals.riddles = result
 	res.render 'search'
 
-server.get '/about', (req, res) ->
+app.get '/about', (req, res) ->
 	res.render 'about',
 
 # 404 path, keep last
-server.get '/*', (req, res) ->
+app.get '/*', (req, res) ->
 	errors.throw404 req, req
 
 server.listen(8123);

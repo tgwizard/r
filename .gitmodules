@@ -1,3 +1,0 @@
-[submodule "lib/coffeekup"]
-	path = lib/coffeekup
-	url = git@github.com:tgwizard/coffeekup.git

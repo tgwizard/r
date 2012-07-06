@@ -21,7 +21,7 @@ HR=\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\
 
 WATCHINTERVAL = 2
 
-all: preparation app/bootstrap app less server
+all: preparation app/bootstrap app less server coffeefilter
 
 preparation:
 	@mkdir -p $(APPDIR)
@@ -37,15 +37,19 @@ server/server/%.js: src/server/%.coffee
 app/css/%.css: src/less/%.less
 	recess --compile $< > $@
 
+# bootstrap is only rebuilt after a clean
+# TODO: make bootstrap rebuild when modified
 app/bootstrap:
 	@make -C lib/bootstrap --no-print-directory
 
 app: $(APPSRC)
 
 server: $(SERVERSRC)
-	cd lib/coffeefilter && cake build
 
 less: $(LESSSRC)
+
+coffeefilter:
+	@make -C lib/coffeefilter --no-print-directory
 
 clean:
 	@echo "Cleaning app..."
@@ -57,6 +61,7 @@ clean:
 
 clean-all: clean
 	@make clean -s -C lib/bootstrap
+	@make clean -s -C lib/coffeefilter
 
 #watch:
 #	nodejs watchmake.js src/ src/less/

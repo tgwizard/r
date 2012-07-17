@@ -80,3 +80,4 @@ app.get '/*', (req, res) ->
 	errors.throw404 req, req
 
 server.listen(8123);
+console.log "Server listening on http://localhost:8123..."

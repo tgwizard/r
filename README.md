@@ -17,3 +17,5 @@ Install all dependencies (via npm), and make symbolic links:
 Build everything, and start the server:
 
 	make start_server
+
+Known to work on Ubuntu 12.04.

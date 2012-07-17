@@ -16,4 +16,9 @@ Build everything, and start the server:
 
 	make start_server
 
+Later, to update to the latest version:
+
+	git pull
+	git submodule update
+
 Known to work on Ubuntu 12.04.

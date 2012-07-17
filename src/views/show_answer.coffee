@@ -1,4 +1,4 @@
-base 'layout'
+extend 'layout'
 
 block 'content', ->
 	div class: 'riddle row-fluid', ->

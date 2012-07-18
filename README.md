@@ -8,6 +8,12 @@ Clone the repository from github and initialize all submodules:
 
 	git clone --recursive git@github.com:tgwizard/r.git
 
+If you forget the --recursive flag, you can do:
+
+	git submodule init
+	git submodule update
+
+
 Install [node.js](http://nodejs.org/) and [npm](http://npmjs.org/):
 
 	sudo apt-get install nodejs npm
@@ -24,6 +30,7 @@ Install local dependencies, and make symbolic links (to some
 dependencies included in the repository):
 
 	make install_deps
+
 
 Build everything, and start the server:
 

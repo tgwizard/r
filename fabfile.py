@@ -1,6 +1,6 @@
 from fabric.api import *
 
-env.hosts = ['buffy']
+env.hosts = ['tgwizard.com']
 
 def deploy():
 	local('git push')

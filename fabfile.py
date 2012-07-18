@@ -9,3 +9,6 @@ def deploy():
 	with cd(code_dir):
 		run('git pull -f')
 		run('make install_deps')
+		run('make')
+		# find nicer ways of doing this
+		run('sudo start www-r || sudo restart www-r')

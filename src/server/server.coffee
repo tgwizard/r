@@ -19,13 +19,16 @@ app.configure ->
 	app.use express.methodOverride()
 	app.use connect.bodyParser()
 	app.use express.cookieParser()
+
+app.configure 'development', ->
 	# static files
 	app.use '/static', express.static('./app')
 	app.use connect.favicon './assets/favicon.ico'
-	app.use app.router
-
-app.configure 'development', ->
+	# dev error handler
 	app.use(express.errorHandler({ showStack: true, dumpExceptions: true }));
+
+app.configure ->
+	app.use app.router
 
 # errors
 app.use (err, req, res, next) ->

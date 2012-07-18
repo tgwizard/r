@@ -82,6 +82,14 @@ install_deps:
 	npm install lib/pagedown
 	ln -sf ../lib/coffeefilter node_modules/coffeefilter
 
+install_global_deps:
+	sudo npm install -g recess
+	sudo npm install -g coffee-script
+	sudo npm install -g uglify-js
+
+deploy:
+	fab deploy
+
 #
 # RUN JSHINT & QUNIT TESTS IN PHANTOMJS
 #

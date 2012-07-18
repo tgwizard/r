@@ -3,9 +3,9 @@ extend 'layout'
 block 'content', ->
 	div class: 'riddle row-fluid', ->
 		div class: 'span4', ->
-			h2 "About riddle me this"
+			h2 "About R"
 			p ->
-				text "Riddle me this is a site blah blah"
+				text "R is a site blah blah"
 
 			p ->
 				text "If you know of good riddle, or improvements to ones already here,
@@ -20,5 +20,5 @@ block 'content', ->
 				a href: "http://nodejs.org/", -> "Node.js"
 				text " and a lot of third party libraries."
 				text "The code can be found on "
-				a href: "#", -> "github.com/tgwizard/riddlemethis"
+				a href: "https://github.com/tgwizard/r", -> "github.com/tgwizard/r"
 				text "."

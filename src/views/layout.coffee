@@ -3,9 +3,9 @@ html ->
 	head ->
 		meta charset: 'utf-8'
 		if @title
-			title "#{@title} - Riddle me this"
+			title "#{@title} - R"
 		else
-			title "Riddle me this"
+			title "R"
 		link rel: 'stylesheet', href: '/static/bootstrap/css/bootstrap.css'
 		link rel: 'stylesheet', href: '/static/css/style.css'
 		link rel: 'stylesheet', href: '/static/bootstrap/css/bootstrap-responsive.css'
@@ -17,7 +17,7 @@ html ->
 						span class: 'icon-bar'
 						span class: 'icon-bar'
 						span class: 'icon-bar'
-					a class: 'brand', href: '/', -> 'Riddle me this'
+					a class: 'brand', href: '/', -> 'R'
 					div class: 'nav-collapse', ->
 						ul class: 'nav', ->
 							cls = if @active_tab == 'index' then 'active' else ''
@@ -31,7 +31,7 @@ html ->
 			footer ->
 				p ->
 					text 'By Adam Renberg. '
-					a href: '/about', -> 'About Riddle me this'
+					a href: '/about', -> 'About R'
 		script src: '/static/js/vendor/jquery-1.7.2.js'
 		script src: '/static/bootstrap/js/bootstrap.min.js'
 		script src: '/static/js/vendor/json2.js'

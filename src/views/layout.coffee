@@ -31,7 +31,8 @@ html ->
 			footer ->
 				p ->
 					text 'By Adam Renberg. '
-					a href: '/about', -> 'About R'
+					a href: '/about', -> 'About'
+					text '.'
 		script src: '/static/js/vendor/jquery-1.7.2.js'
 		script src: '/static/bootstrap/js/bootstrap.min.js'
 		script src: '/static/js/vendor/json2.js'

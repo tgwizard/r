@@ -1,10 +1,6 @@
-extend 'layout'
+extend 'show_base'
 
-block 'content', ->
-	div class: 'riddle row-fluid', ->
-		div class: 'span4', ->
-			h2 -> @riddle.title
-			div class: 'answer', ->
-				h3 "Answer"
-				div -> @riddle.html.answer
-				p -> a href: @riddle.url, -> "&laquo; Back to riddle"
+block 'riddle_content', ->
+	h3 "Answer"
+	div -> @riddle.html.answer
+	p -> a href: @riddle.url, -> "&laquo; Back to riddle"

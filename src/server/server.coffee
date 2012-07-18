@@ -2,7 +2,6 @@
 express = require 'express'
 connect = require 'connect'
 coffeefilter = require 'coffeefilter'
-PagedownConverter = require('pagedown/Markdown.Converter').Converter
 
 # local modules
 errors = require './errors'
@@ -24,11 +23,13 @@ app.configure 'development', ->
 	# static files
 	app.use '/static', express.static('./app')
 	app.use connect.favicon './assets/favicon.ico'
-	# dev error handler
-	app.use(express.errorHandler({ showStack: true, dumpExceptions: true }));
 
 app.configure ->
 	app.use app.router
+
+app.configure 'development', ->
+	# dev error handler
+	app.use(express.errorHandler({ showStack: true, dumpExceptions: true }));
 
 # errors
 app.use (err, req, res, next) ->
@@ -38,15 +39,6 @@ app.use (err, req, res, next) ->
 		status = 404
 		title = '404 Error - Page Not Found'
 	res.render status, status: status, title: title, layout: 'error-layout'
-
-
-# markdown -> html conversion
-mdConv = new PagedownConverter
-
-convertMarkdown2Html = (obj, fields...) ->
-	obj.html = {}
-	for f in fields
-		obj.html[f] = mdConv.makeHtml obj[f]
 
 # routes
 app.get '/', (req, res) ->
@@ -58,7 +50,6 @@ loadRiddle = (req, res, next) ->
 	r = riddles[req.params.slug]
 	if not r
 		errors.throw404 req, res
-	convertMarkdown2Html r, 'content', 'answer'
 	res.locals.riddle = r
 	next()
 

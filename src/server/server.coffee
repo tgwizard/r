@@ -73,7 +73,7 @@ app.get '/search', (req, res) ->
 	result = riddles.search q
 	res.locals.q = q
 	res.locals.riddles = result
-	res.render 'search'
+	res.render 'searchs'
 
 app.get '/about', (req, res) ->
 	res.render 'about',

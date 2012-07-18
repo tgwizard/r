@@ -11,4 +11,7 @@ def deploy():
 		run('make install_deps')
 		run('make')
 		# find nicer ways of doing this
-		run('sudo start www-r || sudo restart www-r')
+		status = run('status www-r')
+		if 'running' in status:
+			sudo('stop www-r')
+		sudo('start www-r')

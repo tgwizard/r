@@ -14,13 +14,13 @@ Install [node.js](http://nodejs.org/) and [npm](http://npmjs.org/):
 
 (on Debian/Ubuntu).
 
-Install the global dependencies ([coffee-script](http://coffeescript.org/),
+Install global dependencies ([coffee-script](http://coffeescript.org/),
 [recess](https://github.com/twitter/recess),
 [uglify-js](https://github.com/mishoo/UglifyJS/)):
 
 	make install_global_deps
 
-Install all dependencies (via npm), and make symbolic links (to some
+Install local dependencies, and make symbolic links (to some
 dependencies included in the repository):
 
 	make install_deps
@@ -28,6 +28,8 @@ dependencies included in the repository):
 Build everything, and start the server:
 
 	make start_server
+
+(Stop it with Ctrl-C).
 
 Later, to update to the latest version:
 

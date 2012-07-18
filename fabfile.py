@@ -8,6 +8,7 @@ def deploy():
 	code_dir = '/var/www/r'
 	with cd(code_dir):
 		run('git pull -f')
+		run('git submodule update')
 		run('make install_deps')
 		run('make')
 		# find nicer ways of doing this

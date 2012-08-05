@@ -12,7 +12,7 @@ APPSRC = ${addprefix ${APPDIR}/, ${APPSRC_}}
 LESSSRC_ = style.css
 LESSSRC = ${addprefix ${CSSDIR}/, ${LESSSRC_}}
 
-SERVERSRC_ = server.js riddles.js errors.js
+SERVERSRC_ = server.js riddles.js riddles_content.js errors.js
 SERVERSRC = ${addprefix ${SERVERDIR}/, ${SERVERSRC_}}
 
 DATE=$(shell date +%I:%M%p)

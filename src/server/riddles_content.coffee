@@ -184,6 +184,48 @@ riddles =
 		date_created: new Date "2012-08-05"
 		date_modified: new Date "2012-08-05"
 
+	'farmer-with-a-goat-cabbage-wolf':
+		title: "The farmer with a goat, cabbage and wolf"
+		content:
+			"""
+			A farmer with a goat, cabbage and a wolf is standing on the side of a
+			river. They need to cross it, but there is only a small row boat that at
+			any time only can fit two of them.
+
+			The goat is hungry, so if the farmer leaves the goat alone with the
+			cabbage, the goat will eat the cabbage. The wolf is also hungry, and it
+			will it the goat if allowed.
+
+			How should the farmer proceed to get them all across the river?
+			"""
+		answer:
+			"""
+			"""
+		difficulty: 0
+		date_created: new Date "2012-08-05"
+		date_modified: new Date "2012-08-05"
+
+	'crossing-a-bridge-in-the-dark':
+		title: "Crossing a bridge in the dark"
+		content:
+			"""
+			It is dark, and for people need to cross a narrow bridge. Only two can
+			cross at a time, and to cross you need to use a torch. The group only has
+			one torch. One of the group is quite slow and takes 10 minutes to cross
+			the bridge. The others take 5, 2 and 1 minutes, respectively.
+
+			What is the fastest way for the group to cross the bridge?
+			"""
+		answer:
+			"""
+			"""
+		difficulty: 0
+		date_created: new Date "2012-08-05"
+		date_modified: new Date "2012-08-05"
+
+
+
+
 
 dummy:
 	'':

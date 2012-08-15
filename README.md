@@ -44,3 +44,7 @@ Later, to update to the latest version:
 	git submodule update
 
 Known to work on Ubuntu 12.04.
+
+The site is built mainly on [node](http://node.js),
+[coffee-script](http://coffeescript.org), [express](http://expressjs.org),
+and [coffeefilter](https://github.com/tgwizard/coffeefilter).

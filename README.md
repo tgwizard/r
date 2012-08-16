@@ -47,4 +47,5 @@ Known to work on Ubuntu 12.04.
 
 The site is built mainly on [node](http://node.js),
 [coffee-script](http://coffeescript.org), [express](http://expressjs.org),
-and [coffeefilter](https://github.com/tgwizard/coffeefilter).
+and [coffeefilter](https://github.com/tgwizard/coffeefilter). Reading the
+documentation for those should help to better understand the code here.

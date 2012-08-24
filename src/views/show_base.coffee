@@ -10,9 +10,9 @@ block 'content', ->
 			if @riddle.about
 				p @riddle.html.about
 
-			p "Created on #{date @riddle.date_created}."
+			p "Created on #{parse_date @riddle.date_created}."
 			if @riddle.date_modified > @riddle.date_created
-				p "Last modified on #{date @riddle.date_modified}"
+				p "Last modified on #{parse_date @riddle.date_modified}"
 
 			p "TODO: like"
 			p "TODO: share"

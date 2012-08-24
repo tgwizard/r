@@ -2,6 +2,7 @@
 express = require 'express'
 connect = require 'connect'
 coffeefilter = require 'coffeefilter'
+moment = require 'moment'
 
 # local modules
 errors = require './errors'
@@ -30,6 +31,11 @@ app.configure ->
 app.configure 'development', ->
 	# dev error handler
 	app.use(express.errorHandler({ showStack: true, dumpExceptions: true }));
+
+datetime_function = (date, format, type) ->
+	return moment(date).format(format)
+
+coffeefilter.configure datetime_function: datetime_function
 
 # errors
 app.use (err, req, res, next) ->

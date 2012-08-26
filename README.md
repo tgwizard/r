@@ -1,6 +1,8 @@
 # r
 
-A website of riddles
+A website of riddles. This code base has been deprecated in favor
+of the new ruby based site,
+[monkeypuzzles](https://github.com/tgwizard/monkeypuzzles).
 
 ## Clone and code
 
